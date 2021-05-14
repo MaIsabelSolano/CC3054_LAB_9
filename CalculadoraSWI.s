@@ -22,11 +22,16 @@ mensaje_18: .asciz "    Valor ingresado...\n"
 mensaje_19: .asciz "  --> Comando elegido: Multiplicacion\n"
 mensaje_20: .asciz "  --> Comando elegido: Potencia\n"
 mensaje_21: .asciz "  --> Comando elegido: Modelo\n"
-mensaje_22: .asciz "  --> Comando elegido: Ingresar primer cadena\n"
+mensaje_22: .asciz "  --> Comando elegido: Ingresar primer cadena (ingresar espacio al final)\n"
 mensaje_23: .asciz "  --> Comando elegido: Ingresar sgeunda cadena\n"
+mensaje_24: .asciz "  --> Comando elegido: Concatenar\n"
+mm: .asciz "  ingreso primer loop\n"
+mm2: .asciz "  ingreso segundo loop2\n"
+
 string: .asciz "                             "
-string_2: .asciz "                                                                        "
-string_3: .asciz "                                                                        "
+string_2: .asciz "                             "
+string_3: .asciz "                             "
+string_4: .asciz "                             "
 resultado: .word 0
 enter: 	.asciz "\n"
 strLen: .word 0
@@ -92,6 +97,9 @@ main:
 
       cmp r4, #'*'
       beq multiplicando
+
+      cmp r4, #'C'
+      beq concatenar
 
       cmp r4, #'P'
       beq potencia
@@ -308,6 +316,27 @@ main:
       bl _keybread
 
       ldr r1,=string_3
+      bl _print
+      b CalculadoraGeneral
+
+   concatenar:
+      ldr r0,=string_2
+      ldr r1,=string_3
+      ldr r2,=string_4
+
+      loop1:
+         ldrb r3, [r0], #1 
+         strb r3, [r2], #1 
+         cmp r3,#32 
+         bne loop1   
+      
+      loop2:
+         ldrb r3, [r1], #1
+         strb r3, [r2], #1  
+         cmp r3,#0  
+         bne  loop2
+         
+      ldr r1,=string_4
       bl _print
       b CalculadoraGeneral
 

@@ -87,4 +87,19 @@ _char2Num:
   SWI 0
   BX LR
 
-
+.global _strlen2
+_strlen2:
+  length .req R5
+  MOV length,#0
+countchars2:
+  LDRB R4,[R0],#1
+  CMP R4,#'\n'      @CR to check end of line
+  BEQ endOfLine2
+  ADD length,#1
+  B countchars2
+endOfLine2:
+  ADD length,#1
+  STR length,[R8]
+  .unreq length
+  SWI 0
+  BX LR /*-- _strlen --*/
