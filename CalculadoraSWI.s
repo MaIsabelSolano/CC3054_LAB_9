@@ -134,9 +134,23 @@ main:
       bl _print
       
 
-      ldr r0,=string
-      bl _keybread
-
+      //ldr r0,=string
+      //bl _keybread
+      //loop para progra defensiva
+      defensa_suma:
+                mov r10,#0
+                ldr r0,=string
+                bl _keybread
+                ldr r1,=string
+                bl _print
+                ldr r0,=string
+                ldr r1,=strNumVal
+                bl _char2Num
+                cmp r10,#0
+                ldreq r0,=mensaje_14 //mensaje de error
+                bleq puts
+                beq CalculadoraGeneral
+                
       ldr r1,=mensaje_18
       bl _print
 
@@ -175,8 +189,24 @@ main:
       bl _print
       
 
-      ldr r0,=string
-      bl _keybread
+      //ldr r0,=string
+      //bl _keybread
+      //progra defensiva
+      defensa_multiplicacion:
+                mov r10,#0
+                ldr r0,=string
+                bl _keybread
+                ldr r1,=string
+                bl _print
+                ldr r0,=string
+                ldr r1,=strNumVal
+                bl _char2Num
+                cmp r10,#0
+                ldreq r0,=mensaje_14 //mensaje de error
+                bleq puts
+                beq CalculadoraGeneral
+                //b CalculadoraGeneral
+
 
       ldr r1,=mensaje_18
       bl _print
