@@ -82,6 +82,7 @@ _char2Num:
   CMPGE R0,#0x39    @ or 9
   SUBLE R0,#0x30    @ subtract 0x30 only if it's a digit
   STRLE R0,[valPointer] @ store value only if it un digito
+  MOVLE r10,#1      @ se afirma que es un digito
   .unreq charPointer
   .unreq valPointer
   SWI 0
