@@ -1,6 +1,11 @@
 .data
 .align 2
 strLen4print: .word 0
+unidades: .word 0
+decenas: .word 00
+centenas: .word 000
+putsNewline: .asciz " "
+
 
 .text
 .align 2
@@ -69,12 +74,17 @@ endOfLine:
 _char2Num:
   charPointer .req R0
   valPointer .req R1
+
+  
+
   LDRB R0,[charPointer]
   CMP R0,#0x30      @ Is the hex ascii value between 0
   CMPGE R0,#0x39    @ or 9
   SUBLE R0,#0x30    @ subtract 0x30 only if it's a digit
-  STRLE R0,[valPointer] @ store value only if it's a digit
+  STRLE R0,[valPointer] @ store value only if it un digito
   .unreq charPointer
   .unreq valPointer
   SWI 0
   BX LR
+
+
